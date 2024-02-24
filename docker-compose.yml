@@ -1,0 +1,17 @@
+version: '3.3'
+
+#Persistência do container
+volumes:
+  database:
+
+services:
+  app:
+    build: .
+    container_name: "steq-front"
+    command: sh -c "npm start"
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/app
+
+    
