@@ -14,7 +14,7 @@ function Login() {
         console.log(email, password);
 
         try {
-            const response = await axios.post('http://localhost:3333/administrador/login',
+            const response = await axios.post('https://steq-back.onrender.com/administrador/login',
                 JSON.stringify({email, password}),
                 {
                     headers: { 'Content-Type': 'application/json' }
