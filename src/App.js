@@ -1,14 +1,22 @@
-import './App.css';
-import Login from './pages/Login';
+import React, { useEffect } from 'react';
+import './global.css';
+import AppRoutes from './routes';
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
+
+  useEffect(() => {
+    document.title = "Sistema de Transporte Escolar de Queimadas"
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <Login />
-      </header>
-    </div>
+    <>
+      <AppRoutes />
+      <ToastContainer/>
+    </>
+    
   );
 }
-
 export default App;
