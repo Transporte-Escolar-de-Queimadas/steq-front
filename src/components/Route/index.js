@@ -6,7 +6,7 @@ export default function Route({route}) {
 
     return (
         <div className='home-route-content'>
-            <span> {route.localPartida}  </span> 
+            <span className='home-route-boarding-place'> {route.localPartida}  </span> 
             <span>  {route.horarioSaida} </span>  
             <div className='home-route-destinations'>
                 {route.destinos.map(destino => (

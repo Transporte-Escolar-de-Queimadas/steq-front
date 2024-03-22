@@ -11,9 +11,16 @@
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
 }
 
+.home-route-boarding-place{
+    text-align: center;
+    display: flex;
+    width: 160px;
+}
+
 .home-route-destinations{
     display: flex;
     flex-direction: column;
     gap: 4px;
     align-items: center;
+    width: 140px;
 }
