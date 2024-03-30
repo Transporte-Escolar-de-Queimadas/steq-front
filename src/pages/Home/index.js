@@ -15,7 +15,7 @@ function Home() {
     const routesData = [
       {
         id: 1,
-        localPartida: 'SóBolos',
+        localPartida: 'Point das Vans',
         horarioSaida: '18:00',
         destinos: ['UFCG', 'UEPB', 'UNINASSAU']
       },
@@ -33,9 +33,9 @@ function Home() {
       },
       {
         id: 4,
-        localPartida: 'Pátio do povo',
+        localPartida: 'Point das vans',
         horarioSaida: '05:45',
-        destinos: ['UNIFACISA', 'IFPB','ESCOLA TERTOLIANO MACIEL']
+        destinos: ['UNIFACISA', 'IFPB','UNIP']
       },
       {
         id: 5,
@@ -110,9 +110,6 @@ function Home() {
               <FontAwesomeIcon icon= {faFilter} style={{color: '#888888'}} />
             </button>
 
-            <button className= 'home-sort-input-icon' >
-              <FontAwesomeIcon icon= {faSort} style={{color: '#888888'}} />
-            </button>
           </div>
 
           <button className= 'home-requirements-search-button' onClick={() => handleSearch()}>
@@ -145,7 +142,7 @@ function Home() {
  
           {    
           loading ? (
-            <div className="loading">Carregando...</div>
+            <div className="home-loading">Carregando...</div>
           ) : (              
             routes.map(route => {
               return (

@@ -54,6 +54,7 @@
     border-color: transparent;
 }
 
+/*
 .home-sort-input-icon{
     position: absolute; 
     right: 16px;
@@ -61,10 +62,11 @@
     background-color: transparent;
     border-color: transparent;
 }
+*/
 
 .home-filter-input-icon{
     position: absolute; 
-    right: 48px;
+    right: 16px;
     height: 100%;
     background-color: transparent;
     border-color: transparent;
@@ -158,6 +160,12 @@
     height: 100%;
     background-color: transparent;
     border-color: transparent;
+}
+
+.home-loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
