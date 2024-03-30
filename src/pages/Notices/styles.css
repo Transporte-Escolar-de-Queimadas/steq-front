@@ -1,0 +1,53 @@
+.notices-container{
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    padding: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+.notices-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+    width: 100%;
+    max-width: 1000px;
+  }
+
+.back_button {
+    width: fit-content;
+    border: none;
+    background: transparent;
+    gap: 8px;
+    display: flex;
+    align-items: center;
+    color: var(--blue);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.notices-title{
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 38px;
+    color: var(--blue);
+    margin: 0 auto; /* Isso centraliza o título horizontalmente */
+}
+
+.notices-content{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+@media (max-width: 1023px) {  
+    .back_button span {
+      display: none;
+    }
+}
+
