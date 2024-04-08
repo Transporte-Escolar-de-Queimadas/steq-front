@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import './styles.css';
-import { login } from "../../service/admin_service";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faFilter,faMagnifyingGlass, faSort, faLongArrowAltDown, faLongArrowAltUp} from '@fortawesome/free-solid-svg-icons';
 import  Route  from "../../components/Route";
 import { useNavigate } from 'react-router-dom';
+import BackIcon from "../../assets/BackIcon.svg";
 
-function Home() {
+function ManageRoutes() {
     const [requirementSearchActive, setRequirementSearchActive] = useState(false);
     const [searchKeyword, setSearchKeyword] = useState("");
     const [loading, setLoading] = useState(true);
@@ -63,8 +63,8 @@ function Home() {
       setLoading(false);
     };
 
-    const handleNotice = () => {
-      navigate('avisos');
+    const handleNewRoute = () => {
+      navigate('/administrador/new-route');
     };
 
     const handleEnterKey = (event) => {
@@ -86,13 +86,28 @@ function Home() {
       setRoutes(sortedRoutes);
       setLoading(false);
     };
+
+    function goBackToPreviousPage() {
+        navigate("/administrador/home");
+      }
   
   
     return (
-      <div className='home-container'> 
-        <h1 className='home-title'> Transporte Escolar de Queimadas</h1>
-        <div className="home-search-input-container">
-          <div className="home-search-input-area">
+      <div className='manage-routes-container'> 
+        <section className = 'manage-routes-header'>
+          <button
+            className="back-button"
+            onClick={() => goBackToPreviousPage()}
+          >
+            <img src={BackIcon} alt="Ícone de Voltar" />
+            <span>Voltar</span>
+          </button>     
+
+          <h1 className='manage-routes-title'> Rotas </h1>
+        </section>
+
+        <div className="manage-routes-search-input-container">
+          <div className="manage-routes-search-input-area">
             <input 
               autoFocus 
               type='search'
@@ -102,47 +117,47 @@ function Home() {
               onChange={(event) => setSearchKeyword(event.target.value)}
               onKeyPress={handleEnterKey}
             />
-            <button className='home-search-input-icon' onClick={() => handleSearch()}>
+            <button className='manage-routes-search-input-icon' onClick={() => handleSearch()}>
               <FontAwesomeIcon icon= {faMagnifyingGlass} style={{color: '#888888'}} />             
             </button>
 
-            <button className='home-filter-input-icon'>
+            <button className='manage-routes-filter-input-icon'>
               <FontAwesomeIcon icon= {faFilter} style={{color: '#888888'}} />
             </button>
 
           </div>
 
-          <button className= 'home-requirements-search-button' onClick={() => handleSearch()}>
+          <button className= 'manage-routes-requirements-search-button' onClick={() => handleSearch()}>
             BUSCAR
           </button>
 
-          <button className = 'home-requirements-notices-button'  onClick={() => handleNotice()}>
-            AVISOS
+          <button className = 'manage-routes-requirements-new-button'  onClick={() => handleNewRoute()}>
+            NOVA ROTA
           </button>
 
-          <button className = 'home-requirements-search_minimized-button' onClick={() => handleSearch()}>
+          <button className = 'manage-routes-requirements-search_minimized-button' onClick={() => handleSearch()}>
             <FontAwesomeIcon icon= {faMagnifyingGlass} style={{color: '#888888'}}/> 
           </button>
                         
         </div>   
 
-        <div className='home-routes-container'>
-          <section className='home-routes-titles'> 
+        <div className='manage-routes-routes-container'>
+          <section className='manage-routes-routes-titles'> 
             <span> Local de embarque </span>
             <span> 
               Horário de saída 
 
-              <button className='home-sort-title-icon' onClick={handleSort}>
+              <button className='manage-routes-sort-title-icon' onClick={handleSort}>
                 <FontAwesomeIcon icon={ascendingOrder ? faLongArrowAltUp : faLongArrowAltDown } style={{ color: '#0C4E8A'}} />
               </button>
 
             </span>
-            <span className='home-routes-titles-destination'> Destinos </span>     
+            <span className='manage-routes-routes-titles-destination'> Destinos </span>     
           </section>
  
           {    
           loading ? (
-            <div className="home-loading">Carregando...</div>
+            <div className="manage-routes-loading">Carregando...</div>
           ) : (              
             routes.map(route => {
               return (
@@ -157,4 +172,4 @@ function Home() {
     );
   }
 
-  export default Home;
+  export default ManageRoutes;

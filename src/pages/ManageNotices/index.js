@@ -1,14 +1,11 @@
 import { useState } from 'react';
 import './styles.css';
-import { login } from "../../service/admin_service";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilter , faMagnifyingGlass, faSort} from '@fortawesome/free-solid-svg-icons';
-import  Route  from "../../components/Route";
 import  Notice  from "../../components/Notice";
 import { useNavigate } from 'react-router-dom';
 import BackIcon from "../../assets/BackIcon.svg";
 
-function Notices() {
+
+function ManageNotices() {
     const [requirementSearchActive, setRequirementSearchActive] = useState(false);
     const [searchKeyword, setSearchKeyword] = useState("");
     const [loading, setLoading] = useState(true);
@@ -43,17 +40,17 @@ function Notices() {
 
     const [notices, setNotices] = useState(noticesData);
 
-    const handleNotice = () => {
-      navigate('avisos');
+    const handleNewNotice = () => {
+      navigate('/administrador/new-notice');
     };
 
     function goBackToPreviousPage() {
-      navigate("/");
+      navigate("/administrador/home");
     }
-  
+
     return (
-      <div className='notices-container'> 
-        <section className = 'notices-header'>
+        <div className='manage-notices-container'> 
+        <section className = 'manage-notices-header'>
           <button
             className="back-button"
             onClick={() => goBackToPreviousPage()}
@@ -62,10 +59,14 @@ function Notices() {
             <span>Voltar</span>
           </button>     
 
-          <h1 className='notices-title'> Avisos </h1>
+          <h1 className='manage-notices-title'> Avisos </h1>
+
+          <button className = 'manage-notices-new-button'  onClick={() => handleNewNotice()}>
+            NOVO AVISO
+          </button>
         </section>
 
-        <div className='notices-content'>
+        <div className='manage-notices-content'>
 
           {         
             notices.map(notice => {
@@ -81,4 +82,4 @@ function Notices() {
     );
   }
 
-  export default Notices;
+  export default ManageNotices;
