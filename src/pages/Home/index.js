@@ -11,6 +11,8 @@ function Home() {
     const [searchKeyword, setSearchKeyword] = useState("");
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const [showFilter, setShowFilter] = useState(false);
+    const [showFilterArea, setShowFilterArea] = useState(false);
   
     const routesData = [
       {
@@ -54,11 +56,25 @@ function Home() {
 
     const handleSearch = () => {
       setLoading(true);
-      const filteredRoutes = routes.filter(route =>
-        route.destinos.some(destino =>
-          destino.toLowerCase().includes(searchKeyword.toLowerCase())
-        ) || route.localPartida.toLowerCase().includes(searchKeyword.toLowerCase())
-      );
+      const filteredRoutes = routes.filter((route) => {
+        const time = parseInt(route.horarioSaida.split(':')[0], 10);
+        const routeIsValid =  route.destinos.some((destino) => destino.toLowerCase().includes(searchKeyword.toLowerCase())) ||
+        route.localPartida.toLowerCase().includes(searchKeyword.toLowerCase())
+        if (showFilter && routeIsValid) {
+          // Filtrar com base no horário de saída e no filtro ativo
+          if (showFilter === 'Manhã') {
+            return time >= 4 && time < 12;
+          } else if (showFilter === 'Tarde') {
+            return time >= 12 && time < 18;
+          } else if (showFilter === 'Noite') {
+            return time >= 18 || time < 4;
+          }
+        } else {
+          // Filtrar apenas por termo de busca
+          return routeIsValid;       
+        }
+      });
+
       setRoutes(filteredRoutes);
       setLoading(false);
     };
@@ -86,31 +102,65 @@ function Home() {
       setRoutes(sortedRoutes);
       setLoading(false);
     };
-  
-  
+
+
+
+    const handleActiveFilter = (filter) => {
+      setShowFilter(showFilter === filter ? false : filter);
+    };
+
+    const handleActiveFilterArea = () => {
+      setShowFilterArea(!showFilterArea);
+    };
+
     return (
       <div className='home-container'> 
         <h1 className='home-title'> Transporte Escolar de Queimadas</h1>
-        <div className="home-search-input-container">
-          <div className="home-search-input-area">
-            <input 
-              autoFocus 
-              type='search'
-              placeholder="Buscar destino" 
-              onBlur={() => setTimeout(() => setRequirementSearchActive(false), 300)}
-              value={searchKeyword}
-              onChange={(event) => setSearchKeyword(event.target.value)}
-              onKeyPress={handleEnterKey}
-            />
-            <button className='home-search-input-icon' onClick={() => handleSearch()}>
-              <FontAwesomeIcon icon= {faMagnifyingGlass} style={{color: '#888888'}} />             
-            </button>
+        <div className='home-search-input-container'>
+          <div className='home-search-area'>
+            <div className='home-search-input-area'>
+              <input 
+                autoFocus 
+                type='search'
+                placeholder='Buscar destino'
+                onBlur={() => setTimeout(() => setRequirementSearchActive(false), 300)}
+                value={searchKeyword}
+                onChange={(event) => setSearchKeyword(event.target.value)}
+                onKeyPress={handleEnterKey}
+              />
+              <button className='home-search-input-icon' onClick={() => handleSearch()}>
+                <FontAwesomeIcon icon= {faMagnifyingGlass} style={{color: '#888888'}} />             
+              </button>
 
-            <button className='home-filter-input-icon'>
-              <FontAwesomeIcon icon= {faFilter} style={{color: '#888888'}} />
-            </button>
+              <button className='home-filter-input-icon' onClick={() => handleActiveFilterArea()}>
+                <FontAwesomeIcon icon= {faFilter} style={{color: '#888888'}} />
+              </button>
 
+            </div>
+
+            <div className={`home-filter-area ${showFilterArea ? 'active' : ''}`}>
+              <span className='home-filter-title'> Turno:</span>  
+                <div className='home-filter-button-area'>
+                  <button className={`home-filter-button ${showFilter === 'Manhã' ? 'active' : ''}`}
+                  onClick={() => handleActiveFilter('Manhã')}>
+                  </button> 
+                  <span> Manhã</span>
+                </div>
+                <div className='home-filter-button-area'>
+                  <button className={`home-filter-button ${showFilter === 'Tarde' ? 'active' : ''}`}
+                  onClick={() => handleActiveFilter('Tarde')}>
+                  </button> 
+                  <span> Tarde</span>
+                </div>
+                <div className='home-filter-button-area'>
+                  <button className={`home-filter-button ${showFilter === 'Noite' ? 'active' : ''}`}
+                  onClick={() => handleActiveFilter('Noite')}
+                  ></button> 
+                  <span> Noite</span>
+                </div>              
+            </div>
           </div>
+
 
           <button className= 'home-requirements-search-button' onClick={() => handleSearch()}>
             BUSCAR

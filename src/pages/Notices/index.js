@@ -18,25 +18,25 @@ function Notices() {
       {
         id: 1,
         titulo: 'Sem ônibus para a UEPB na próxima quinta (24/03)',
-        data: '22/03/24',
+        data: '22/03/2024',
         descricao: 'Devido aos últimos acontecimentos na UEPB não haverá ônibus neste dia para a instituição.'
       },
       {
         id: 2,
         titulo: 'Ônibus escolares de férias',
-        data: '18/12/24',
+        data: '18/12/2024',
         descricao: 'Os ônibus entrarão de férias neste dia 20 de dezembro e até o dia 20 de janeiro, desejamos a todos os alunos boas férias!'
       },
       {
         id: 3,
         titulo: 'Todos os ônibus não irão passar pela UFCG por tempo indeterminado',
-        data: '22/03/24',
+        data: '22/03/2024',
         descricao: 'Os ônibus não passarão na UFCG devido à greve que iniciou semana passada'
       },
       {
         id: 4,
         titulo: 'Mais um ônibus irá para o IFPB',
-        data: '22/02/24',
+        data: '22/02/2024',
         descricao: 'Devido ao grande número de alunos neste semestre, o ônibus que sai de 12h15m do pátio do povo também passará no IFPB para diminuir a superlotação'
       },
     ]

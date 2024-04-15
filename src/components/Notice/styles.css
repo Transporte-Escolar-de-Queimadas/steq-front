@@ -16,6 +16,19 @@
     font-weight: 500;
 }
 
+.notice-data-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 4px;
+}
+.notice-data-area span{
+    font-size: 16px;
+    color: var(--blue);
+    font-weight: 400;
+}
+
 .notice-description{
     font-size: 20px;
     color: var(--red);

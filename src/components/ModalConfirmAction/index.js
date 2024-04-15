@@ -6,6 +6,7 @@ import "./styles.css";
 
 import AlertIcon from "../../assets/AlertIcon.svg";
 import CloseIcon from "../../assets/CloseIcon.svg";
+import DeleteIcon from "../../assets/DeleteIcon.svg"
 
 
 const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, isDelete}) => {
@@ -19,7 +20,7 @@ const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, i
             <img src={CloseIcon} alt='Ícone de fechar' />
         </button>
         <div className="modal-box">
-            <img className="alert-icon" src={AlertIcon} alt="Ícone de Alerta" />
+            <img className="alert-icon" src={isDelete ? DeleteIcon : AlertIcon} alt="Ícone de Alerta" />
             <div className="modal-text-area">
                 <span className="modal-description">{modalDescription}</span>
             </div>

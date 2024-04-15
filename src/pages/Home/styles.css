@@ -18,17 +18,64 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     width: 100%;
     max-width: 1000px;
     gap: 24px;
 }
 
+.home-search-area{
+    width: 100%;
+    justify-content: flex-start;
+}
+
 .home-search-input-area{
     position: relative;
     width: 100%;
     justify-content: flex-start;
+}
+
+.home-filter-area{
+    display: none;
+}
+
+.home-filter-area.active{
+    display: flex;
+    padding: 16px;
+    width: 100%;
+    background-color: var(--secondary-background);
+    border-radius: 10px;
+    border: 1px solid #C2C2C2;
+    gap: 16px;
+}
+
+.home-filter-title{
+    font-size: 16px;
+    color: var(--infos);
+    font-weight: 500;
+    line-height: 18px;
+}
+
+.home-filter-button-area{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.home-filter-button{
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--light-gray);
+    border-radius: 50%;
+}
+
+.home-filter-button.active{
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--light-gray);
+    background-color: var(--light-gray);
+    border-radius: 50%;
 }
 
 .home-search-input-area input {
