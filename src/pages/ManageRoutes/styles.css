@@ -1,4 +1,4 @@
-.home-container{
+.manage-routes-container{
     display: flex;
     flex-direction: column;
     gap: 48px;
@@ -7,78 +7,40 @@
     align-items: center;
 }
 
-.home-title{
+.manage-routes-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+    width: 100%;
+    max-width: 1000px;
+  }
+
+.manage-routes-title{
     font-weight: 600;
     font-size: 32px;
     line-height: 38px;
     color: var(--blue);
+    margin: 0 auto; /* Isso centraliza o título horizontalmente */
 }
 
-.home-search-input-container {
+.manage-routes-search-input-container {
     position: relative;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     width: 100%;
     max-width: 1000px;
     gap: 24px;
 }
 
-.home-search-area{
-    width: 100%;
-    justify-content: flex-start;
-}
-
-.home-search-input-area{
+.manage-routes-search-input-area{
     position: relative;
     width: 100%;
     justify-content: flex-start;
 }
 
-.home-filter-area{
-    display: none;
-}
-
-.home-filter-area.active{
-    display: flex;
-    padding: 16px;
-    width: 100%;
-    background-color: var(--secondary-background);
-    border-radius: 10px;
-    border: 1px solid #C2C2C2;
-    gap: 16px;
-}
-
-.home-filter-title{
-    font-size: 16px;
-    color: var(--infos);
-    font-weight: 500;
-    line-height: 18px;
-}
-
-.home-filter-button-area{
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
-.home-filter-button{
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--light-gray);
-    border-radius: 50%;
-}
-
-.home-filter-button.active{
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--light-gray);
-    background-color: var(--light-gray);
-    border-radius: 50%;
-}
-
-.home-search-input-area input {
+.manage-routes-search-input-area input {
     border-radius: 10px;
     border: 1px solid #C2C2C2;
     background-color:  var(--secondary-background);
@@ -89,11 +51,11 @@
     font-size: 16px;
 }
 
-.home-search-input-area input:focus {
+.manage-routes-search-input-area input:focus {
     border: 1px solid #C2C2C2 !important;
 }
 
-.home-search-input-icon{
+.manage-routes-search-input-icon{
     position: absolute; 
     left: 16px;
     height: 100%;
@@ -102,7 +64,7 @@
 }
 
 /*
-.home-sort-input-icon{
+.manage-routes-sort-input-icon{
     position: absolute; 
     right: 16px;
     height: 100%;
@@ -111,7 +73,7 @@
 }
 */
 
-.home-filter-input-icon{
+.manage-routes-filter-input-icon{
     position: absolute; 
     right: 16px;
     height: 100%;
@@ -119,7 +81,7 @@
     border-color: transparent;
 }
 
-.home-requirements-search-button{
+.manage-routes-requirements-search-button{
     width: 160px;
     height: 48px;
     text-align: center;
@@ -136,15 +98,15 @@
     font-family: "Roboto Condensed", sans-serif;
 }
 
-.home-requirements-search-button:hover {
+.manage-routes-requirements-search-button:hover {
     background-color: var(--light-blue);
     -webkit-transition: all 0.2s ease;
     transition: all 0.2s ease;
   }
 
-  .home-requirements-notices-button{
+.manage-routes-requirements-new-button{
     right: 40px;
-    width: 160px;
+    width: 180px;
     height: 48px;
     text-align: center;
     display: flex;
@@ -161,17 +123,18 @@
     font-family: "Roboto Condensed", sans-serif;
 }
 
-.home-requirements-notices-button:hover {
+.manage-routes-requirements-new-button:hover {
     color: var(--light-blue);  
     border: 1px solid var(--light-blue);
     -webkit-transition: all 0.2s ease;
     transition: all 0.2s ease;
   }
 
-.home-requirements-search_minimized-button{
+.manage-routes-requirements-search_minimized-button{
     display: none;
 }
-.home-routes-container{
+
+.manage-routes-routes-container{
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -179,37 +142,37 @@
     max-width: 1000px;
 }
 
-.home-routes-titles{
+.manage-routes-routes-titles{
     padding: 0px 16px;
     display: flex;
     justify-content: space-between;
 }
 
-.home-routes-titles-destination{
+.manage-routes-routes-titles-destination{
     width: 160px;
     text-align: end;
 }
 
-.home-routes-titles span{
+.manage-routes-routes-titles span{
     font-size: 24px;
     font-weight: 500;
     color: var(--blue);
 }
 
-.home-routes-titles button{
+.manage-routes-routes-titles button{
     font-size: 18px;
     font-weight: 400;
     color: var(--blue);
 }
 
-.home-sort-title-icon{ 
+.manage-routes-sort-title-icon{ 
     margin-left: 4px;
     height: 100%;
     background-color: transparent;
     border-color: transparent;
 }
 
-.home-loading{
+.manage-routes-loading{
     display: flex;
     justify-content: center;
     align-items: center;
