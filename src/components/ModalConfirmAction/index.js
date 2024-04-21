@@ -8,10 +8,62 @@ import AlertIcon from "../../assets/AlertIcon.svg";
 import CloseIcon from "../../assets/CloseIcon.svg";
 import DeleteIcon from "../../assets/DeleteIcon.svg"
 
+import { createRoute } from "../../service/routes_service";
 
-const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, isDelete}) => {
+
+const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, isDelete, route, action}) => {
   const navigate = useNavigate();
 
+
+  function createNewRoute() {
+    if (route) {
+      createRoute(route)
+        .then(() => {
+          toast.success("Rota criada com sucesso!", {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+
+          navigate("/");
+        })
+        .catch(() => {
+          toast.error("Erro ao criar rota.", {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+
+          closeModal();
+        });
+    }
+  }
+
+  function confirmAction() {
+    switch (action) {
+      case "create":
+        createNewRoute();
+        return;
+      case "C":
+        console.log("concludeRequirement()");
+        return;
+      case "N":
+        console.log("createNewRequirement()");
+        return;
+      default:
+        return;
+    }
+  }
 
   return (
     <div className= {`modal-container ${isOpen ? 'open' : 'closed'}`}>
@@ -28,7 +80,7 @@ const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, i
             <button className="modal-cancel-button" onClick={() => closeModal()}>
                 CANCELAR
             </button>
-            <button className={`modal-confirm-button ${isDelete ? 'delete' : ''}`} onClick={() => console.log("confirmAction()")}>
+            <button className={`modal-confirm-button ${isDelete ? 'delete' : ''}`} onClick={() => confirmAction()}>
                 CONFIRMAR
             </button>
             </div>
