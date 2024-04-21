@@ -13,4 +13,22 @@ export async function getAllRoutes(queryParams) {
           reject();
         });
     });
-  }
+}
+
+export async function createRoute(routeData) {
+  return new Promise((resolve, reject) => {
+    api
+      .post("/administrador/insert-route", routeData, {
+        headers: { 
+          'Cache-Control': 'no-cache'
+        }
+      })
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch(() => {
+        reject();
+      });
+  });
+}
+
