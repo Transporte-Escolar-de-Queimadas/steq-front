@@ -8,10 +8,11 @@ import { useNavigate } from 'react-router-dom';
 import { getAllRoutes } from '../../service/routes_service';
 import { useRoutes } from '../../contexts/routesContext';
 import {RoutesContext} from "../../contexts/routesContext"
+import { toast } from "react-toastify";
 
 function Home() {
-    const [requirementSearchActive, setRequirementSearchActive] = useState(false);
     const [searchKeyword, setSearchKeyword] = useState("");
+    const [hasSearchKeyword, setHasSearchKeyWord] = useState(false);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const [showFilter, setShowFilter] = useState(false);
@@ -19,51 +20,23 @@ function Home() {
     const [ascendingOrder, setAscendingOrder] = useState(true);
     const [routes, setRoutes] = useState();
   
-    const routesData = [
-      {
-        id: 1,
-        embarkation_place: 'Point das Vans',
-        embarkation_time: '18:00',
-        destinations: ['UFCG', 'UEPB', 'UNINASSAU']
-      },
-      {
-        id: 2,
-        embarkation_place: 'Pátio do povo',
-        embarkation_time: '05:45',
-        destinations: ['UFCG', 'UEPB']
-      },
-      {
-        id: 3,
-        embarkation_place: 'Pátio do povo',
-        embarkation_time: '11:45',
-        destinations: ['UFCG', 'IFPB','UEPB', 'UNIFACISA']
-      },
-      {
-        id: 4,
-        embarkation_place: 'Point das vans',
-        embarkation_time: '05:45',
-        destinations: ['UNIFACISA', 'IFPB','UNIP']
-      },
-      {
-        id: 5,
-        embarkation_place: 'Pedra do ligeiro',
-        embarkation_time: '16:30',
-        destinations: ['UNIFACISA']
-      },
-    ]
-
     useEffect(() => {   
       setLoading(true); 
       getAllRoutes()
       .then((response) => {
-        console.log("response", response);   
-      //  setRoutes(response);
-        console.log("SetRoutes?:", routes);
-        setRoutes(response);
-        
+        setRoutes(response);      
       })
       .catch((error) => {
-        console.log(error);
+        toast.error("Erro ao buscar rotas", {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       })
       .finally(() => {
         handleSort();
@@ -72,9 +45,28 @@ function Home() {
     }, []); // Executar apenas uma vez na primeira renderização
 
     const handleSearch = () => {
+
+      if(searchKeyword){
+        setHasSearchKeyWord(true);
+      } else{
+        setHasSearchKeyWord(false);
+      }
+
       setLoading(true);
+    // pegar a ordenação ao contrário porque ao final do handleSort, o estado é invertido
+    // preparando a função para o próximo handleSort.
+      const searchAscendingOrder = !ascendingOrder;
+      
       getAllRoutes().then(response => {
-        const filteredRoutes = response.filter((route) => {
+        
+        // Aplicar a ordenação na lista 
+        const sortedFilteredRoutes = response.sort((a, b) => {
+          const timeA = new Date(`2000-01-01T${a.embarkation_time}`);
+          const timeB = new Date(`2000-01-01T${b.embarkation_time}`);
+          return searchAscendingOrder ? timeA - timeB : timeB - timeA;
+        });
+
+        const filteredRoutes = sortedFilteredRoutes.filter((route) => {
           const time = parseInt(route.embarkation_time.split(':')[0], 10);
           const destinationsArray = JSON.parse(route.destinations);
           const routeIsValid =  destinationsArray.some((destino) => destino.toLowerCase().includes(searchKeyword.toLowerCase())) ||
@@ -93,13 +85,23 @@ function Home() {
             return routeIsValid;       
           }
         });
+        
         setRoutes(filteredRoutes);
       })
       .catch((error) => {
-        console.log(error);
+        toast.error("Erro ao buscar rotas", {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       })
       .finally(() => {
-        setLoading(false);       
+        setLoading(false);
       })
     };
 
@@ -114,33 +116,62 @@ function Home() {
     };
 
     const handleSort = () => {
-      console.log("useState routes:", routes);
       setLoading(true);
-      getAllRoutes().then(response => {
-        const sortedRoutes = response.sort((a, b) => {
-          const timeA = new Date(`2000-01-01T${a.embarkation_time}`);
-          const timeB = new Date(`2000-01-01T${b.embarkation_time}`);
-    
-          return ascendingOrder ? timeA - timeB : timeB - timeA;
+      // se há turno ou foi filtrado por destino, deve ordenar pela lista de rotas filtrada 
+      if(showFilter || hasSearchKeyword){
+        try {
+          const sortedRoutes = routes.sort((a, b) => {
+            const timeA = new Date(`2000-01-01T${a.embarkation_time}`);
+            const timeB = new Date(`2000-01-01T${b.embarkation_time}`);
+      
+            return ascendingOrder ? timeA - timeB : timeB - timeA;
+          });
+          setRoutes(sortedRoutes);    
+          setAscendingOrder(!ascendingOrder);   
+          setLoading(false);      
+        } catch (error) {
+            toast.error("Erro ao ordenar rotas", {
+              position: "top-right",
+              autoClose: 4000,
+              hideProgressBar: false,
+              closeOnClick: false,
+              pauseOnHover: false,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
+        }
+      } else{
+        // se não, ordena pela rota que vem da API
+        getAllRoutes().then(response => {
+          const sortedRoutes = response.sort((a, b) => {
+            const timeA = new Date(`2000-01-01T${a.embarkation_time}`);
+            const timeB = new Date(`2000-01-01T${b.embarkation_time}`);
+      
+            return ascendingOrder ? timeA - timeB : timeB - timeA;
+          });
+          setRoutes(sortedRoutes);
+        })
+        .catch((error) => {
+          toast.error("Erro ao ordenar rotas", {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        })
+        .finally(() => {
+          setAscendingOrder(!ascendingOrder);   
+          setLoading(false);      
         });
-        setRoutes(sortedRoutes);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setAscendingOrder(!ascendingOrder);
-        setLoading(false);
-      });
-    };
+      }
+    }; 
 
-  /*
-  Esse useEffect está atrapalhando o useEffect do handle Sort?
-    useEffect(() => {
-      handleSearch(); // Executar busca sempre que showFilter mudar
-    }, [showFilter]); // Dependências que acionam o useEffect()
-    */
-
+    // Ativa ou muda de filtro entre os turnos manhã, tarde ou noite.
     const handleActiveFilter = (filter) => {
       setShowFilter(showFilter === filter ? false : filter);
     };
@@ -159,7 +190,6 @@ function Home() {
                 autoFocus 
                 type='search'
                 placeholder='Buscar destino'
-                onBlur={() => setTimeout(() => setRequirementSearchActive(false), 300)}
                 value={searchKeyword}
                 onChange={(event) => setSearchKeyword(event.target.value)}
                 onKeyPress={handleEnterKey}
@@ -206,7 +236,7 @@ function Home() {
             AVISOS
           </button>
 
-          <button className = 'home-requirements-search_minimized-button' onClick={() => handleSearch()}>
+          <button className = 'home-requirements-search-minimized-button' onClick={() => handleSearch()}>
             <FontAwesomeIcon icon= {faMagnifyingGlass} style={{color: '#888888'}}/> 
           </button>
                         
@@ -226,15 +256,19 @@ function Home() {
             <span className='home-routes-titles-destination'> Destinos </span>     
           </section>
  
-          {    
-          loading ? (
+          {loading ? (
             <div className="home-loading">Carregando...</div>
-          ) : (              
-            routes.map(route => {
-              return (
-                  <Route key={route.id} route={route} /> 
-              )
-            })
+          ) : (
+            // Se 'loading' for falsa, renderize o conteúdo abaixo
+            routes.length < 1 ? (
+              // Se o array 'routes' estiver vazio, renderize "nenhuma rota encontrada"
+              <div> Nenhuma rota encontrada... </div>
+            ) : (
+              // Se o array 'routes' não estiver vazio, renderize as rotas
+              routes.map((route) => {
+                return <Route key={route.id} route={route} />;
+              })
+            )
           )}
         
         </div>  

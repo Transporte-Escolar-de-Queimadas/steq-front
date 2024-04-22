@@ -30,7 +30,7 @@ const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, i
             theme: "colored",
           });
 
-          navigate("/");
+          navigate("/administrador/manage-routes");
         })
         .catch(() => {
           toast.error("Erro ao criar rota.", {
