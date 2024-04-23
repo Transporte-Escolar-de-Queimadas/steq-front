@@ -32,3 +32,30 @@ export async function createRoute(routeData) {
   });
 }
 
+export async function editRoute(updatedData) {
+  return new Promise(async (resolve, reject) => {
+    return api
+      .put(`/administrador/update-route/${updatedData.id}`, updatedData)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch(() => {
+        reject();
+      });
+  });
+}
+
+export async function deleteRoute(routeData) {
+  return new Promise((resolve, reject) => {
+    api
+      .delete(`/administrador/delete-route/${routeData.id}`, {
+      })
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch(() => {
+        reject();
+      });
+  });
+}
+

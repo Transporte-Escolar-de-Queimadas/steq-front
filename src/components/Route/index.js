@@ -1,12 +1,16 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './styles.css';
-
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Route({route}) {
-    console.log(JSON.parse(route.destinations));
-
+    const navigate = useNavigate();
+    const location = useLocation();
+    const handleEditRoute = () => {
+        navigate("/administrador/edit-route", { state: route});
+    }
     return (
-        <div className='home-route-content'>
+        <div className={`home-route-content ${location.pathname.includes('administrador') ? 'admin' : ''}`} 
+        onClick={ location.pathname.includes('administrador') ? () => handleEditRoute() : null}>
             <span className='home-route-boarding-place'> {route.embarkation_place}  </span> 
             <span>  {route.embarkation_time} </span>  
             <div className='home-route-destinations'>

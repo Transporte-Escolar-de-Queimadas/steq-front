@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import './styles.css';
-import  Notice  from "../../components/Notice";
 import { useNavigate } from 'react-router-dom';
 import BackIcon from "../../assets/BackIcon.svg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -27,19 +26,9 @@ function NewRoute() {
     const openModal = () => {
       setIsModalOpen(true);
     };
-  /*
-    const handleCreateRoute = () => {
-      // Lógica para criar a rota
-      openModal(); // Abre o modal após criar a rota
-    };
-  */
 
     const closeModal = () => {
       setIsModalOpen(false);
-    };
-
-    const handleNotice = () => {
-      navigate('avisos');
     };
 
     function goBackToPreviousPage() {
@@ -238,7 +227,7 @@ function NewRoute() {
                     id="input-destinations"
                     className="new-route-input"
                     type="text"
-                    placeholder="Adicionar destinos"
+                    placeholder="Adicionar destino"
                     onChange={(e) => setCurrentDestination(e.target.value)}
                     value={currentDestination}
                     />
@@ -263,12 +252,12 @@ function NewRoute() {
         </section>
 
       <ModalConfirmAction 
-      modalDescription = {modalDescription}
-      isOpen={isModalOpen}
-      closeModal={closeModal}
-      isDelete = {isDelete}
-      action = {action}
-      route = {route}
+        modalDescription = {modalDescription}
+        isOpen={isModalOpen}
+        closeModal={closeModal}
+        isDelete = {isDelete}
+        action = {action}
+        route = {route}
       />
       </div>
     );
