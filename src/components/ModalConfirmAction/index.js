@@ -8,12 +8,79 @@ import AlertIcon from "../../assets/AlertIcon.svg";
 import CloseIcon from "../../assets/CloseIcon.svg";
 import DeleteIcon from "../../assets/DeleteIcon.svg"
 
-import { createRoute } from "../../service/routes_service";
+import { createRoute, editRoute, deleteRoute } from "../../service/routes_service";
 
 
 const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, isDelete, route, action}) => {
   const navigate = useNavigate();
 
+  function excludeRoute(){
+    if(route){
+      deleteRoute(route)
+        .then( () => {
+          toast.success("Rota excluída com sucesso!", {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+
+          navigate("/administrador/manage-routes");         
+        })
+        .catch(() => {
+          toast.error("Erro ao excluir rota.", {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+
+          closeModal();
+        });
+    }
+  }
+
+  function updateRoute(){
+    if(route){
+      editRoute(route)
+        .then( () => {
+          toast.success("Rota editada com sucesso!", {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+
+          navigate("/administrador/manage-routes");         
+        })
+        .catch(() => {
+          toast.error("Erro ao editar rota.", {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+
+          closeModal();
+        });
+    }
+  }
 
   function createNewRoute() {
     if (route) {
@@ -54,11 +121,11 @@ const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, i
       case "create":
         createNewRoute();
         return;
-      case "C":
-        console.log("concludeRequirement()");
+      case "update":
+        updateRoute();
         return;
-      case "N":
-        console.log("createNewRequirement()");
+      case "delete":
+        excludeRoute();
         return;
       default:
         return;
