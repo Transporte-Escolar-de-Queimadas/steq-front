@@ -107,7 +107,7 @@ function ManageRoutes() {
     };
 
     const handleNewRoute = () => {
-      navigate('/administrador/new-route');
+      navigate('/administrador/nova-rota');
     };
 
     const handleEnterKey = (event) => {

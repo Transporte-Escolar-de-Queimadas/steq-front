@@ -43,7 +43,7 @@ function EditNotice() {
   };
 
   function goBackToPreviousPage() {
-    navigate("/administrador/manage-notices");
+    navigate("/administrador/avisos");
   }
 
   const handleDescriptionChange = (e) => {

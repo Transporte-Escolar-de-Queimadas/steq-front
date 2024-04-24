@@ -30,7 +30,7 @@ const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, i
             theme: "colored",
           });
 
-          navigate("/administrador/manage-notices");         
+          navigate("/administrador/avisos");         
         })
         .catch(() => {
           toast.error("Erro ao excluir aviso.", {
@@ -63,7 +63,7 @@ const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, i
             theme: "colored",
           });
 
-          navigate("/administrador/manage-notices");         
+          navigate("/administrador/avisos");         
         })
         .catch(() => {
           toast.error("Erro ao editar aviso.", {
@@ -95,7 +95,7 @@ const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, i
             progress: undefined,
             theme: "colored",
           });
-          navigate("/administrador/manage-notices");
+          navigate("/administrador/avisos");
         })
         .catch(() => {
           toast.error("Erro ao criar aviso.", {
@@ -127,7 +127,7 @@ const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, i
             progress: undefined,
             theme: "colored",
           });
-          navigate("/administrador/manage-routes");         
+          navigate("/administrador/rotas");         
         })
         .catch(() => {
           toast.error("Erro ao excluir rota.", {
@@ -159,7 +159,7 @@ const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, i
             progress: undefined,
             theme: "colored",
           });
-          navigate("/administrador/manage-routes");         
+          navigate("/administrador/rotas");         
         })
         .catch(() => {
           toast.error("Erro ao editar rota.", {
@@ -191,7 +191,7 @@ const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, i
             progress: undefined,
             theme: "colored",
           });
-          navigate("/administrador/manage-routes");
+          navigate("/administrador/rotas");
         })
         .catch(() => {
           toast.error("Erro ao criar rota.", {

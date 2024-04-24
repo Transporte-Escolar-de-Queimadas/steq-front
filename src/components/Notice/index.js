@@ -6,7 +6,7 @@ export default function Notice({notice}) {
     const navigate = useNavigate();
     const location = useLocation();
     const handleEditNotice = () => {
-        navigate("/administrador/edit-notice", { state: notice});
+        navigate("/administrador/editar-aviso", { state: notice});
     }
 
     return (

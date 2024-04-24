@@ -46,7 +46,7 @@ function EditRoute() {
   };
 
   function goBackToPreviousPage() {
-    navigate("/administrador/manage-routes");
+    navigate("/administrador/rotas");
   }
 
   const handleAddDestination = () => {

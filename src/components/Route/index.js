@@ -6,7 +6,7 @@ export default function Route({route}) {
     const navigate = useNavigate();
     const location = useLocation();
     const handleEditRoute = () => {
-        navigate("/administrador/edit-route", { state: route});
+        navigate("/administrador/editar-rota", { state: route});
     }
     return (
         <div className={`home-route-content ${location.pathname.includes('administrador') ? 'admin' : ''}`} 
