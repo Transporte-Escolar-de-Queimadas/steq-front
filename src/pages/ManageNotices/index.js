@@ -1,45 +1,61 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './styles.css';
 import  Notice  from "../../components/Notice";
 import { useNavigate } from 'react-router-dom';
 import BackIcon from "../../assets/BackIcon.svg";
-
+import { getAllNotices } from '../../service/notices_service';
+import { toast } from "react-toastify";
 
 function ManageNotices() {
-    const [requirementSearchActive, setRequirementSearchActive] = useState(false);
-    const [searchKeyword, setSearchKeyword] = useState("");
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-  
-    const noticesData = [
-      {
-        id: 1,
-        titulo: 'Sem ônibus para a UEPB na próxima quinta (24/03)',
-        data: '22/03/24',
-        descricao: 'Devido aos últimos acontecimentos na UEPB não haverá ônibus neste dia para a instituição.'
-      },
-      {
-        id: 2,
-        titulo: 'Ônibus escolares de férias',
-        data: '18/12/24',
-        descricao: 'Os ônibus entrarão de férias neste dia 20 de dezembro e até o dia 20 de janeiro, desejamos a todos os alunos boas férias!'
-      },
-      {
-        id: 3,
-        titulo: 'Todos os ônibus não irão passar pela UFCG por tempo indeterminado',
-        data: '22/03/24',
-        descricao: 'Os ônibus não passarão na UFCG devido à greve que iniciou semana passada'
-      },
-      {
-        id: 4,
-        titulo: 'Mais um ônibus irá para o IFPB',
-        data: '22/02/24',
-        descricao: 'Devido ao grande número de alunos neste semestre, o ônibus que sai de 12h15m do pátio do povo também passará no IFPB para diminuir a superlotação'
-      },
-    ]
+    const [notices, setNotices] = useState();
 
-    const [notices, setNotices] = useState(noticesData);
+    useEffect(() => {   
+      renderNotices();
+    }, []); // Executar apenas uma vez na primeira renderização
 
+    function renderNotices() {
+    setLoading(true);
+    getAllNotices()
+    .then((response) => {
+      
+      // Define uma comparação entre datas
+      const compareNotices = (a, b) => {
+        const dateA = new Date(a.date.split('/').reverse().join('/'));
+        const dateB = new Date(b.date.split('/').reverse().join('/'));
+    
+        if (dateA > dateB) return -1; // DateA é mais novo (fica no início)
+        if (dateA < dateB) return 1; // DateA é mais antigo (fica no final)
+        // se as datas são iguais, quem tem o id maior fica na frente (adição mais recente)
+        return b.id - a.id;
+      };
+    
+      if(response.length > 1) {
+      // Sort the notices array using the comparison function
+      const sortedNotices = [...response].sort(compareNotices);
+        setNotices(sortedNotices);
+      } else {
+        setNotices(response);
+      }
+      })
+      .catch((error) => {
+        toast.error("Erro ao buscar avisos", {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+    }
+    
     const handleNewNotice = () => {
       navigate('/administrador/new-notice');
     };
@@ -68,13 +84,22 @@ function ManageNotices() {
 
         <div className='manage-notices-content'>
 
-          {         
-            notices.map(notice => {
-              return (
-                  <Notice key = {notice.id} notice={notice} /> 
-              )
-            })
-          }
+        {loading ? (
+            <div className="home-loading">Carregando...</div>
+          ) : (
+            // Se 'loading' for falso, renderize o conteúdo abaixo
+            notices.length < 1 ? (
+              // Se o array 'notices' estiver vazio, renderize "nenhum aviso encontrado"
+              <div> Nenhuma rota encontrada... </div>
+            ) : (
+              // Se o array 'notices' não estiver vazio, renderize os avisos
+              notices.map(notice => {
+                return (
+                    <Notice key = {notice.id} notice={notice} /> 
+                )
+              })
+            )
+        )}
         
         </div>  
 

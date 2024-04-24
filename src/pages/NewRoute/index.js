@@ -147,7 +147,7 @@ function NewRoute() {
         };
   
         setRoute(data);
-        setAction("create");
+        setAction("createRoute");
         openModal();
       }
       

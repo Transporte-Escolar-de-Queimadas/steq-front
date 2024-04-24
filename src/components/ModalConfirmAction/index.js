@@ -9,10 +9,109 @@ import CloseIcon from "../../assets/CloseIcon.svg";
 import DeleteIcon from "../../assets/DeleteIcon.svg"
 
 import { createRoute, editRoute, deleteRoute } from "../../service/routes_service";
+import { createNotice, editNotice, deleteNotice } from "../../service/notices_service";
 
 
-const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, isDelete, route, action}) => {
+const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, isDelete, route, action, notice}) => {
   const navigate = useNavigate();
+
+  function excludeNotice(){
+    if(notice){
+      deleteNotice(notice)
+        .then( () => {
+          toast.success("Aviso excluído com sucesso!", {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+
+          navigate("/administrador/manage-notices");         
+        })
+        .catch(() => {
+          toast.error("Erro ao excluir aviso.", {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          closeModal();
+        });
+    }
+  }
+
+  function updateNotice(){
+    if(notice){
+      editNotice(notice)
+        .then( () => {
+          toast.success("Aviso editado com sucesso!", {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+
+          navigate("/administrador/manage-notices");         
+        })
+        .catch(() => {
+          toast.error("Erro ao editar aviso.", {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          closeModal();
+        });
+    }
+  }
+
+  function createNewNotice() {
+    if (notice) {
+      createNotice(notice)
+        .then(() => {
+          toast.success("Aviso criado com sucesso!", {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          navigate("/administrador/manage-notices");
+        })
+        .catch(() => {
+          toast.error("Erro ao criar aviso.", {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          closeModal();
+        });
+    }
+  }
 
   function excludeRoute(){
     if(route){
@@ -28,7 +127,6 @@ const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, i
             progress: undefined,
             theme: "colored",
           });
-
           navigate("/administrador/manage-routes");         
         })
         .catch(() => {
@@ -42,7 +140,6 @@ const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, i
             progress: undefined,
             theme: "colored",
           });
-
           closeModal();
         });
     }
@@ -62,7 +159,6 @@ const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, i
             progress: undefined,
             theme: "colored",
           });
-
           navigate("/administrador/manage-routes");         
         })
         .catch(() => {
@@ -76,7 +172,6 @@ const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, i
             progress: undefined,
             theme: "colored",
           });
-
           closeModal();
         });
     }
@@ -96,7 +191,6 @@ const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, i
             progress: undefined,
             theme: "colored",
           });
-
           navigate("/administrador/manage-routes");
         })
         .catch(() => {
@@ -110,7 +204,6 @@ const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, i
             progress: undefined,
             theme: "colored",
           });
-
           closeModal();
         });
     }
@@ -118,14 +211,23 @@ const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, i
 
   function confirmAction() {
     switch (action) {
-      case "create":
+      case "createRoute":
         createNewRoute();
         return;
-      case "update":
+      case "updateRoute":
         updateRoute();
         return;
-      case "delete":
+      case "deleteRoute":
         excludeRoute();
+        return;
+      case "createNotice":
+        createNewNotice();
+        return;
+      case "updateNotice":
+        updateNotice();
+        return;
+      case "deleteNotice":
+        excludeNotice();
         return;
       default:
         return;
