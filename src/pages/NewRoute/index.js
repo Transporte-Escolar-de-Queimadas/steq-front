@@ -32,7 +32,7 @@ function NewRoute() {
     };
 
     function goBackToPreviousPage() {
-      navigate("/administrador/manage-routes");
+      navigate("/administrador/rotas");
     }
 
     const handleAddDestination = () => {

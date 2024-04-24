@@ -7,11 +7,11 @@ function Home() {
     const navigate = useNavigate();
 
     const handleManageRoutes = () => {
-      navigate('/administrador/manage-routes');
+      navigate('/administrador/rotas');
     };
 
     const handleManageNotices = () => {
-      navigate('/administrador/manage-notices');
+      navigate('/administrador/avisos');
     };
 
     const handleLogout = () => {

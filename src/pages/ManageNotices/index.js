@@ -57,7 +57,7 @@ function ManageNotices() {
     }
     
     const handleNewNotice = () => {
-      navigate('/administrador/new-notice');
+      navigate('/administrador/novo-aviso');
     };
 
     function goBackToPreviousPage() {

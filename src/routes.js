@@ -21,12 +21,12 @@ export default function AppRoutes() {
           <Route path="/avisos" element={<Notices />} />
           <Route path="/administrador" element={<Login />} />
           <Route path="/administrador/home" element={<AdminHome />} />
-          <Route path="/administrador/manage-routes" element={<ManageRoutes />} />
-          <Route path="/administrador/manage-notices" element={<ManageNotices />} />
-          <Route path="/administrador/new-route" element={<NewRoute/>} />
-          <Route path="/administrador/edit-route" element={<EditRoute/>} />
-          <Route path="/administrador/new-notice" element={<NewNotice/>} />
-          <Route path="/administrador/edit-notice" element={<EditNotice/>} />
+          <Route path="/administrador/rotas" element={<ManageRoutes />} />
+          <Route path="/administrador/avisos" element={<ManageNotices />} />
+          <Route path="/administrador/nova-rota" element={<NewRoute/>} />
+          <Route path="/administrador/editar-rota" element={<EditRoute/>} />
+          <Route path="/administrador/novo-aviso" element={<NewNotice/>} />
+          <Route path="/administrador/editar-aviso" element={<EditNotice/>} />
         </Routes>
       </BrowserRouter>
     );
