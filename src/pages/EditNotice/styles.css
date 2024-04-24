@@ -57,12 +57,11 @@
     max-width: 500px;
 }
 
-
 .edit-notice-input-container{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
   
 .edit-notice-input-title {
@@ -80,7 +79,7 @@
 .edit-notice-input-text {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   gap: 16px;
 }
   
@@ -97,14 +96,44 @@
   padding: 16px;
 }
 
+.edit-notice-input.error {
+  border: 1px solid var(--red);
+}
+
+.edit-notice-input-description-text {
+  width: 100%;
+  height: auto;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.edit-notice-input-description {
+  width: 100%;
+  height: 120px;
+  background: transparent;
+  border: 1px solid #e6e6e6; 
+  resize: none; 
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  overflow: auto; /* Permitir rolagem para o conteúdo excedente */
+  padding: 16px;
+}
+
+.edit-notice-input-description.error {
+  border: 1px solid var(--red);
+}
+
 .edit-notice-character-limit {
-    width: 100%;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 19px;
-    letter-spacing: 0em;
-    text-align: end;
-    color: var(--descriptions);
+  align-self: flex-end; /* Alinhar à direita dentro do container flex */
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  color: var(--descriptions);
 }
 
 .edit-route-buttons{

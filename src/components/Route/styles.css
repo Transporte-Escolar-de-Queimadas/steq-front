@@ -1,16 +1,4 @@
-.home-route-content{
-    background-color: var(--secondary-background);
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-    padding: 16px;
-    font-size: 20px;
-    color: var(--red);
-    font-weight: 400;
-    border-radius: 4px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-}
-
+.home-route-content,
 .home-route-content.admin{
     background-color: var(--secondary-background);
     display: flex;
@@ -27,7 +15,7 @@
 .home-route-content.admin:hover{
     cursor: pointer;
     background-color: var(--background);
-    border: 1px solid var(--border-input);
+    border: 2px solid var(--border-input);
 }
 
 .home-route-boarding-place{

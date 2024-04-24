@@ -175,7 +175,7 @@ function EditRoute() {
         };
 
         setRoute(data);
-        setAction("update");
+        setAction("updateRoute");
         setModalDescription("Tem certeza que deseja editar essa rota?");
         setIsDelete(false);
         openModal();
@@ -183,12 +183,11 @@ function EditRoute() {
   };
 
   const handleDeleteRoute = () => {
-    // Lógica para excluir a rota
     const data = {
       id: id,
     };
     setRoute(data);
-    setAction("delete");
+    setAction("deleteRoute");
     setModalDescription("Tem certeza que deseja excluir essa rota?");
     setIsDelete(true);
     openModal(); // Abre o modal após excluir a rota  
