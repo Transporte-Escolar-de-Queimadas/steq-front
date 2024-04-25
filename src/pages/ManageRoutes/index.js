@@ -10,6 +10,7 @@ import { useRoutes } from '../../contexts/routesContext';
 import {RoutesContext} from "../../contexts/routesContext"
 import { toast } from "react-toastify";
 import BackIcon from "../../assets/BackIcon.svg";
+import Loading from '../../components/Loading';
 
 function ManageRoutes() {
     const [searchKeyword, setSearchKeyword] = useState("");
@@ -274,7 +275,9 @@ function ManageRoutes() {
           </section>
  
           {loading ? (
-            <div className="manage-routes-loading">Carregando...</div>
+            <div className='home-loading'>
+                <Loading />
+            </div>
           ) : (
             // Se 'loading' for falsa, renderize o conteúdo abaixo
             routes.length < 1 ? (

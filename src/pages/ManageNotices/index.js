@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import BackIcon from "../../assets/BackIcon.svg";
 import { getAllNotices } from '../../service/notices_service';
 import { toast } from "react-toastify";
+import Loading from '../../components/Loading';
 
 function ManageNotices() {
     const [loading, setLoading] = useState(true);
@@ -85,12 +86,15 @@ function ManageNotices() {
         <div className='manage-notices-content'>
 
         {loading ? (
-            <div className="home-loading">Carregando...</div>
+            <div className='manage-notices-loading'>
+              <Loading/>
+            </div>
+            
           ) : (
             // Se 'loading' for falso, renderize o conteúdo abaixo
             notices.length < 1 ? (
               // Se o array 'notices' estiver vazio, renderize "nenhum aviso encontrado"
-              <div> Nenhuma rota encontrada... </div>
+              <div> Nenhum aviso encontrado... </div>
             ) : (
               // Se o array 'notices' não estiver vazio, renderize os avisos
               notices.map(notice => {

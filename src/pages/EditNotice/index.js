@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faPlusCircle, faCirclePlus, faTrashCan} from '@fortawesome/free-solid-svg-icons';
 import ModalConfirmAction from '../../components/ModalConfirmAction';
 import { toast } from "react-toastify";
+import Loading from '../../components/Loading';
 
 function EditNotice() {
   const [requirementSearchActive, setRequirementSearchActive] = useState(false);
@@ -142,7 +143,9 @@ function EditNotice() {
       <div>
         { 
         loading ? (
-            <div className="home-loading">Carregando...</div>
+          <div className='edit-notice-loading'> 
+            <Loading />
+          </div>
           ) : ( 
             <div className='edit-notice-container'> 
               <section className = 'edit-notice-header'>

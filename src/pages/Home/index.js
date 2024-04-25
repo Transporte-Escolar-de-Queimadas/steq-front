@@ -9,6 +9,7 @@ import { getAllRoutes } from '../../service/routes_service';
 import { useRoutes } from '../../contexts/routesContext';
 import {RoutesContext} from "../../contexts/routesContext"
 import { toast } from "react-toastify";
+import Loading from '../../components/Loading';
 
 function Home() {
     const [searchKeyword, setSearchKeyword] = useState("");
@@ -257,7 +258,10 @@ function Home() {
           </section>
  
           {loading ? (
-            <div className="home-loading">Carregando...</div>
+            <div className='home-loading'>
+              <Loading />
+            </div>
+            
           ) : (
             // Se 'loading' for falsa, renderize o conteúdo abaixo
             routes.length < 1 ? (

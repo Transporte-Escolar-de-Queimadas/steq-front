@@ -7,6 +7,7 @@ import {faPlusCircle, faCirclePlus, faTrashCan, faTrash} from '@fortawesome/free
 import ModalConfirmAction from '../../components/ModalConfirmAction';
 import InputMask from "react-input-mask";
 import { toast } from "react-toastify";
+import Loading from '../../components/Loading';
 
 function EditRoute() {
   const [embarkationPlace, setEmbarkationPlace] = useState('');
@@ -197,7 +198,9 @@ function EditRoute() {
 
         <div> 
           {loading ? (
-            <div className="home-loading">Carregando...</div>
+            <div className='edit-route-loading'>
+              <Loading />
+            </div>
           ) : (
             <div className='edit-route-container'>
               <section className = 'edit-route-header'>
