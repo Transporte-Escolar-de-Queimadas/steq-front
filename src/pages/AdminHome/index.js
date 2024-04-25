@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './styles.css';
+import cookies from '../../utils/cookies';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -15,6 +16,7 @@ function Home() {
     };
 
     const handleLogout = () => {
+      cookies.deleteCookie("@steq/token");
       navigate('/administrador');
     };
 

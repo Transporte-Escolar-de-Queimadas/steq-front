@@ -1,4 +1,4 @@
-import { api } from "./api";
+import { api, apiAuth } from "./api";
 
 export async function getAllNotices(queryParams) {
     return new Promise((resolve, reject) => {
@@ -17,7 +17,7 @@ export async function getAllNotices(queryParams) {
 
 export async function createNotice(noticeData) {
   return new Promise((resolve, reject) => {
-    api
+    apiAuth
       .post("/administrador/insert-notice", noticeData, {
         headers: { 
           'Cache-Control': 'no-cache'
@@ -34,7 +34,7 @@ export async function createNotice(noticeData) {
 
 export async function editNotice(updatedData) {
   return new Promise(async (resolve, reject) => {
-    return api
+    return apiAuth
       .put(`/administrador/update-notice/${updatedData.id}`, updatedData)
       .then((response) => {
         resolve(response.data);
@@ -47,7 +47,7 @@ export async function editNotice(updatedData) {
 
 export async function deleteNotice(noticeData) {
   return new Promise((resolve, reject) => {
-    api
+    apiAuth
       .delete(`/administrador/delete-notice/${noticeData.id}`, {
       })
       .then((response) => {

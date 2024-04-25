@@ -12,6 +12,12 @@ import EditRoute from "./pages/EditRoute";
 import NewNotice from "./pages/NewNotice"
 import EditNotice from "./pages/EditNotice"
 
+import cookies from "./utils/cookies";
+
+const PrivateWrapper = ({ }) => {
+  let isAuthenticated = cookies.getCookie("@steq/token");
+  return isAuthenticated ? <Outlet /> : <Navigate to="administrador" />;
+};
 
 export default function AppRoutes() {
     return (
@@ -20,13 +26,27 @@ export default function AppRoutes() {
           <Route path="/" element={<Home />} />
           <Route path="/avisos" element={<Notices />} />
           <Route path="/administrador" element={<Login />} />
-          <Route path="/administrador/home" element={<AdminHome />} />
-          <Route path="/administrador/rotas" element={<ManageRoutes />} />
-          <Route path="/administrador/avisos" element={<ManageNotices />} />
-          <Route path="/administrador/nova-rota" element={<NewRoute/>} />
-          <Route path="/administrador/editar-rota" element={<EditRoute/>} />
-          <Route path="/administrador/novo-aviso" element={<NewNotice/>} />
-          <Route path="/administrador/editar-aviso" element={<EditNotice/>} />
+          <Route element = {<PrivateWrapper />}>
+            <Route path="/administrador/home" element={<AdminHome />} />
+          </Route>
+          <Route element = {<PrivateWrapper />}>
+            <Route path="/administrador/rotas" element={<ManageRoutes />} />
+          </Route>          
+          <Route element = {<PrivateWrapper />}>
+            <Route path="/administrador/avisos" element={<ManageNotices />} />
+          </Route> 
+          <Route element = {<PrivateWrapper />}>
+            <Route path="/administrador/nova-rota" element={<NewRoute/>} />
+          </Route>                     
+          <Route element = {<PrivateWrapper />}>
+            <Route path="/administrador/editar-rota" element={<EditRoute/>} />
+          </Route>       
+          <Route element = {<PrivateWrapper />}>
+            <Route path="/administrador/novo-aviso" element={<NewNotice/>} />
+          </Route>    
+          <Route element = {<PrivateWrapper />}>
+            <Route path="/administrador/editar-aviso" element={<EditNotice/>} />
+          </Route>            
         </Routes>
       </BrowserRouter>
     );
