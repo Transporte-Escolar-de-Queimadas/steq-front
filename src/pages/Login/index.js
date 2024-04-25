@@ -1,53 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import './styles.css';
 import { login } from '../../service/admin_service';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import cookies from "../../utils/cookies";
 
 function Login() {
     const navigate = useNavigate();
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [user, setUser] = useState(null);
 
-/*
-    const handleLogin = async (e) => {
-        e.preventDefault();
-
-        try {
-            const response = await axios.post('https://steq-back.onrender.com/administrador/login',
-                JSON.stringify({email, password}),
-                {
-                    headers: { 'Content-Type': 'application/json' }
-                }            
-            );
-
-            setUser(response.data);
-
-        } catch (error) {
-            if (!error?.response) {
-                setError('Erro ao acessar o servidor');
-            } else if (error.response.status == 401) {
-                setError('Usuário ou senha inválidos');
-            }
+    useEffect(() => {
+        var storedUser = cookies.getCookie("@steq/token");
+    
+        if (storedUser) {
+          navigate("/administrador/home");
         }
-
-    };
-*/
+      }, []);
 
     const handleLogin = async (e) => {
         e.preventDefault();
-
         try {
-            await login(email,password).then((response) => {
-                setUser(response.data);
-            });
-
-            if(user){
-                navigate('home');
+            const data = {
+                username: username,
+                password: password,
             }
-        
+            await login(data);
+            navigate('home');              
         }catch (error) {
             toast.error('Erro de autenticação', {
                 position: 'top-right',
@@ -60,13 +39,6 @@ function Login() {
                 theme: 'colored',
               });
         }
-
-    };
-
-    const handleLogout = async (e) => {
-        e.preventDefault();
-        setUser(null);
-        setError('');
     };
 
     return (
@@ -78,7 +50,7 @@ function Login() {
                                 name='user' 
                                 placeholder='Usuário' 
                                 required
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={(e) => setUsername(e.target.value)}
                                 />
                         <input type='password' 
                                 name='password' 
