@@ -6,6 +6,7 @@ import BackIcon from "../../assets/BackIcon.svg";
 import { getAllNotices } from '../../service/notices_service';
 import { toast } from "react-toastify";
 import Loading from '../../components/Loading';
+import NotFound from '../../components/NotFound';
 
 function Notices() {
     const [loading, setLoading] = useState(true);
@@ -86,7 +87,11 @@ function Notices() {
             // Se 'loading' for falso, renderize o conteúdo abaixo
             notices.length < 1 ? (
               // Se o array 'notices' estiver vazio, renderize "nenhum aviso encontrado"
-              <div> Nenhum aviso encontrado... </div>
+              <div className='notices-not-found'>
+                <NotFound
+                  description = "Nenhum aviso encontrado"
+                />
+              </div>
             ) : (
               // Se o array 'notices' não estiver vazio, renderize os avisos
               notices.map(notice => {

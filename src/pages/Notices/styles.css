@@ -31,9 +31,9 @@
     max-width: 1000px;
 }
 
-.notices-loading{
-    margin-top: 140px;
+.notices-loading,
+.notices-not-found{
+    margin-top: 120px;
 }
-
 
 
