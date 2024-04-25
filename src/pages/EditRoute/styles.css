@@ -179,6 +179,8 @@
   transition: all 0.2s ease;
 }
 
-
+.edit-route-loading{
+  margin-top: 180px;
+}
 
 
