@@ -10,6 +10,7 @@ import { useRoutes } from '../../contexts/routesContext';
 import {RoutesContext} from "../../contexts/routesContext"
 import { toast } from "react-toastify";
 import Loading from '../../components/Loading';
+import NotFound from '../../components/NotFound';
 
 function Home() {
     const [searchKeyword, setSearchKeyword] = useState("");
@@ -266,7 +267,11 @@ function Home() {
             // Se 'loading' for falsa, renderize o conteúdo abaixo
             routes.length < 1 ? (
               // Se o array 'routes' estiver vazio, renderize "nenhuma rota encontrada"
-              <div> Nenhuma rota encontrada... </div>
+              <div className='home-not-found'>
+                <NotFound
+                  description = "Nenhuma rota encontrada"
+                />
+              </div>
             ) : (
               // Se o array 'routes' não estiver vazio, renderize as rotas
               routes.map((route) => {

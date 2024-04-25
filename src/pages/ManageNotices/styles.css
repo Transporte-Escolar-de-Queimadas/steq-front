@@ -56,8 +56,9 @@
     max-width: 1000px;
 }
 
-.manage-notices-loading{
-    margin-top: 140px;
+.manage-notices-loading,
+.manage-notices-not-found{
+    margin-top: 120px;
 }
 
 

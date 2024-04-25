@@ -11,6 +11,7 @@ import {RoutesContext} from "../../contexts/routesContext"
 import { toast } from "react-toastify";
 import BackIcon from "../../assets/BackIcon.svg";
 import Loading from '../../components/Loading';
+import NotFound from '../../components/NotFound';
 
 function ManageRoutes() {
     const [searchKeyword, setSearchKeyword] = useState("");
@@ -275,14 +276,18 @@ function ManageRoutes() {
           </section>
  
           {loading ? (
-            <div className='home-loading'>
+            <div className='manage-routes-loading'>
                 <Loading />
             </div>
           ) : (
             // Se 'loading' for falsa, renderize o conteúdo abaixo
             routes.length < 1 ? (
               // Se o array 'routes' estiver vazio, renderize "nenhuma rota encontrada"
-              <div> Nenhuma rota encontrada... </div>
+              <div className='manage-routes-not-found'>
+                <NotFound
+                  description = "Nenhuma rota encontrada"
+                />
+              </div>
             ) : (
               // Se o array 'routes' não estiver vazio, renderize as rotas
               routes.map((route) => {
