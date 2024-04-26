@@ -12,7 +12,7 @@ export default function Route({route}) {
         <div className={`home-route-content ${location.pathname.includes('administrador') ? 'admin' : ''}`} 
         onClick={ location.pathname.includes('administrador') ? () => handleEditRoute() : null}>
             <span className='home-route-boarding-place'> {route.embarkation_place}  </span> 
-            <span>  {route.embarkation_time} </span>  
+            <span className='home-route-time'>  {route.embarkation_time} </span>  
             <div className='home-route-destinations'>
                 { 
                 (() => {

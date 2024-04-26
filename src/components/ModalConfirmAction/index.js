@@ -12,7 +12,7 @@ import { createRoute, editRoute, deleteRoute } from "../../service/routes_servic
 import { createNotice, editNotice, deleteNotice } from "../../service/notices_service";
 
 
-const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, isDelete, route, action, notice}) => {
+const ModalConfirmAction = forwardRef(({ modalDescription, isOpen, closeModal, isDelete, route, action, notice}, ref) => {
   const navigate = useNavigate();
 
   function excludeNotice(){

@@ -213,7 +213,8 @@ function ManageRoutes() {
                   onChange={(event) => setSearchKeyword(event.target.value)}
                   onKeyPress={handleEnterKey}
               />
-              <button className='manage-routes-search-input-icon' onClick={() => handleSearch()}>
+
+              <button className='manage-routes-search-input-icon'>
                 <FontAwesomeIcon icon= {faMagnifyingGlass} style={{color: '#888888'}} />             
               </button>
 
@@ -224,55 +225,54 @@ function ManageRoutes() {
             </div>
 
             <div className={`manage-routes-filter-area ${showFilterArea ? 'active' : ''}`}>
-              <span className='manage-routes-filter-title'> Turno:</span>  
-                <div className='manage-routes-filter-button-area'>
-                  <button className={`manage-routes-filter-button ${showFilter === 'Manhã' ? 'active' : ''}`}
-                  onClick={() => handleActiveFilter('Manhã')}>
-                  </button> 
-                  <span> Manhã</span>
-                </div>
-                <div className='manage-routes-filter-button-area'>
-                  <button className={`manage-routes-filter-button ${showFilter === 'Tarde' ? 'active' : ''}`}
-                  onClick={() => handleActiveFilter('Tarde')}>
-                  </button> 
-                  <span> Tarde</span>
-                </div>
-                <div className='manage-routes-filter-button-area'>
-                  <button className={`manage-routes-filter-button ${showFilter === 'Noite' ? 'active' : ''}`}
-                  onClick={() => handleActiveFilter('Noite')}
-                  ></button> 
-                  <span> Noite</span>
-                </div>              
+                <span className='manage-routes-filter-title'> Turno:</span>  
+                <div className='manage-routes-filter-buttons'>
+                  <div className='manage-routes-filter-button-area'>
+                    <button className={`manage-routes-filter-button ${showFilter === 'Manhã' ? 'active' : ''}`}
+                    onClick={() => handleActiveFilter('Manhã')}>
+                    </button> 
+                    <span> Manhã</span>
+                  </div>
+                  <div className='manage-routes-filter-button-area'>
+                    <button className={`manage-routes-filter-button ${showFilter === 'Tarde' ? 'active' : ''}`}
+                    onClick={() => handleActiveFilter('Tarde')}>
+                    </button> 
+                    <span> Tarde</span>
+                  </div>
+                  <div className='manage-routes-filter-button-area'>
+                    <button className={`manage-routes-filter-button ${showFilter === 'Noite' ? 'active' : ''}`}
+                    onClick={() => handleActiveFilter('Noite')}
+                    ></button> 
+                    <span> Noite</span>
+                  </div>           
+                </div>   
             </div>
           </div>
 
+          <div className='manage-routes-search-buttons'>
+            <button className= 'manage-routes-search-button' onClick={() => handleSearch()}>
+              BUSCAR
+            </button>
 
-          <button className= 'manage-routes-requirements-search-button' onClick={() => handleSearch()}>
-            BUSCAR
-          </button>
-
-          <button className = 'manage-routes-requirements-new-button'  onClick={() => handleNewRoute()}>
-            NOVA ROTA
-          </button>
-
-          <button className = 'manage-routes-requirements-search-minimized-button' onClick={() => handleSearch()}>
-            <FontAwesomeIcon icon= {faMagnifyingGlass} style={{color: '#888888'}}/> 
-          </button>
+            <button className = 'manage-routes-new-button'  onClick={() => handleNewRoute()}>
+              NOVA ROTA
+            </button>
+          </div>
                         
         </div>   
 
         <div className='manage-routes-routes-container'>
-          <section className='manage-routes-routes-titles'> 
-            <span> Local de embarque </span>
-            <span> 
-              Horário de saída 
-
+          <section className='manage-routes-titles'> 
+            <span className='manage-routes-titles-place'> Embarque </span>
+            <div className='manage-routes-titles-time'> 
+              <span>
+                Horário
+              </span>
               <button className='manage-routes-sort-title-icon' onClick={handleSort}>
                 <FontAwesomeIcon icon={ascendingOrder ? faLongArrowAltUp : faLongArrowAltDown } style={{ color: '#0C4E8A'}} />
               </button>
-
-            </span>
-            <span className='manage-routes-routes-titles-destination'> Destinos </span>     
+            </div>
+            <span className='manage-routes-titles-destination'> Destinos </span>     
           </section>
  
           {loading ? (
