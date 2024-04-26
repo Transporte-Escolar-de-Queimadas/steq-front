@@ -4,7 +4,7 @@
     display: flex;
     justify-content: space-between; 
     align-items: center;
-    padding: 16px;
+    padding: 16px 0px;
     font-size: 20px;
     color: var(--red);
     font-weight: 400;
@@ -22,6 +22,13 @@
     text-align: center;
     display: flex;
     width: 160px;
+    justify-content: center;
+}
+
+.home-route-time{
+    display: flex;
+    width: 100px;
+    justify-content: center;
 }
 
 .home-route-destinations{
@@ -30,4 +37,17 @@
     gap: 4px;
     align-items: center;
     width: 140px;
+}
+
+@media (max-width: 710px) {  
+    .home-route-content,
+    .home-route-content.admin{
+        font-size: 16px;
+    }
+    .home-route-boarding-place{
+        width: 120px;
+    }
+    .home-route-destinations{
+        width: 100px;
+    }
 }

@@ -66,6 +66,7 @@
     height: 100%;
     background-color: transparent;
     border-color: transparent;
+    cursor: grab !important;
 }
 
 /*
@@ -107,6 +108,11 @@
     line-height: 18px;
 }
 
+.manage-routes-filter-buttons{
+    display: flex;
+    gap: 16px;
+}
+
 .manage-routes-filter-button-area{
     display: flex;
     gap: 8px;
@@ -128,8 +134,14 @@
     border-radius: 50%;
 }
 
-.manage-routes-requirements-search-button{
-    width: 160px;
+.manage-routes-search-buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+.manage-routes-search-button{
+    width: 120px;
     height: 48px;
     text-align: center;
     display: flex;
@@ -145,15 +157,15 @@
     font-family: "Roboto Condensed", sans-serif;
 }
 
-.manage-routes-requirements-search-button:hover {
+.manage-routes-search-button:hover {
     background-color: var(--light-blue);
     -webkit-transition: all 0.2s ease;
     transition: all 0.2s ease;
   }
 
-.manage-routes-requirements-new-button{
+.manage-routes-new-button{
     right: 40px;
-    width: 180px;
+    width: 120px;
     height: 48px;
     text-align: center;
     display: flex;
@@ -170,16 +182,12 @@
     font-family: "Roboto Condensed", sans-serif;
 }
 
-.manage-routes-requirements-new-button:hover {
+.manage-routes-new-button:hover {
     color: var(--light-blue);  
     border: 1px solid var(--light-blue);
     -webkit-transition: all 0.2s ease;
     transition: all 0.2s ease;
   }
-
-.manage-routes-requirements-search-minimized-button{
-    display: none;
-}
 
 .manage-routes-routes-container{
     display: flex;
@@ -189,31 +197,43 @@
     max-width: 1000px;
 }
 
-.manage-routes-routes-titles{
-    padding: 0px 16px;
+.manage-routes-titles{
+    padding: 0px;
     display: flex;
     justify-content: space-between;
 }
 
-.manage-routes-routes-titles-destination{
+.manage-routes-titles-place{
     width: 160px;
-    text-align: end;
+    text-align: center;
 }
 
-.manage-routes-routes-titles span{
+.manage-routes-titles-time{
+    display: flex;
+    gap: 4px;
+    width: 100px;
+    justify-content: center;
+}
+
+.manage-routes-titles-destination{
+    width: 140px;
+    text-align: center;
+}
+
+.manage-routes-titles span{
     font-size: 24px;
     font-weight: 500;
     color: var(--blue);
 }
 
-.manage-routes-routes-titles button{
+.manage-routes-titles button{
     font-size: 18px;
     font-weight: 400;
     color: var(--blue);
 }
 
 .manage-routes-sort-title-icon{ 
-    margin-left: 4px;
+    margin-top: 1px;
     height: 100%;
     background-color: transparent;
     border-color: transparent;
@@ -230,4 +250,74 @@
     margin-top: 80px;
 }
 
+@media (max-width: 710px) {  
+    .manage-routes-container {
+      padding: 40px 16px;
+    }
+    .manage-routes-titles-place{
+        width: 120px;
+    }  
+    .manage-routes-titles-destination{
+        width: 100px;
+    }
+    .manage-routes-titles span{
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 665px) {  
+    .manage-routes-search-input-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 1000px;
+        gap: 24px;
+    }
+
+    .manage-routes-search-buttons{
+        width: 100%;
+        justify-content: center;
+        gap:32px;
+    }
+
+    .manage-routes-search-button{
+        width: 150px;
+        height: 40px;
+    }
+
+    .manage-routes-new-button{
+        width: 150px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 420px) {  
+    .manage-routes-container {
+        padding: 40px 8px;
+    }
+    .manage-routes-titles-place{
+        text-align: start;
+        padding-left: 4px;
+    }   
+    .manage-routes-titles-destination{
+        text-align: end;
+        padding-right: 4px;
+    }
+}
+
+@media (max-width: 395px) {  
+    .manage-routes-filter-area.active{
+        flex-direction: column;
+        display: flex;
+        padding: 16px;
+        width: 100%;
+        background-color: var(--secondary-background);
+        border-radius: 10px;
+        border: 1px solid #C2C2C2;
+        gap: 16px;
+    }
+}
 

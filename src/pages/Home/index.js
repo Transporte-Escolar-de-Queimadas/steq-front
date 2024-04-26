@@ -196,7 +196,7 @@ function Home() {
                 onChange={(event) => setSearchKeyword(event.target.value)}
                 onKeyPress={handleEnterKey}
               />
-              <button className='home-search-input-icon' onClick={() => handleSearch()}>
+              <button className='home-search-input-icon' >
                 <FontAwesomeIcon icon= {faMagnifyingGlass} style={{color: '#888888'}} />             
               </button>
 
@@ -208,6 +208,7 @@ function Home() {
 
             <div className={`home-filter-area ${showFilterArea ? 'active' : ''}`}>
               <span className='home-filter-title'> Turno:</span>  
+              <div className='home-filter-buttons'>
                 <div className='home-filter-button-area'>
                   <button className={`home-filter-button ${showFilter === 'Manhã' ? 'active' : ''}`}
                   onClick={() => handleActiveFilter('Manhã')}>
@@ -225,36 +226,34 @@ function Home() {
                   onClick={() => handleActiveFilter('Noite')}
                   ></button> 
                   <span> Noite</span>
-                </div>              
+                </div> 
+              </div>             
             </div>
           </div>
 
+          <div className='home-search-buttons'>
+            <button className= 'home-search-button' onClick={() => handleSearch()}>
+              BUSCAR
+            </button>
 
-          <button className= 'home-requirements-search-button' onClick={() => handleSearch()}>
-            BUSCAR
-          </button>
-
-          <button className = 'home-requirements-notices-button'  onClick={() => handleNotice()}>
-            AVISOS
-          </button>
-
-          <button className = 'home-requirements-search-minimized-button' onClick={() => handleSearch()}>
-            <FontAwesomeIcon icon= {faMagnifyingGlass} style={{color: '#888888'}}/> 
-          </button>
+            <button className = 'home-notices-button'  onClick={() => handleNotice()}>
+              AVISOS
+            </button>
+          </div>
                         
         </div>   
 
         <div className='home-routes-container'>
           <section className='home-routes-titles'> 
-            <span> Local de embarque </span>
-            <span> 
-              Horário de saída 
-
+            <span className='home-routes-titles-place'> Embarque </span>
+            <div className='home-routes-titles-time'> 
+              <span>
+                Horário
+              </span>
               <button className='home-sort-title-icon' onClick={handleSort}>
                 <FontAwesomeIcon icon={ascendingOrder ? faLongArrowAltUp : faLongArrowAltDown } style={{ color: '#0C4E8A'}} />
               </button>
-
-            </span>
+            </div>
             <span className='home-routes-titles-destination'> Destinos </span>     
           </section>
  
