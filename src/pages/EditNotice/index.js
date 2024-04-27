@@ -4,7 +4,7 @@ import  Notice  from "../../components/Notice";
 import { useNavigate, useLocation } from 'react-router-dom';
 import BackIcon from "../../assets/BackIcon.svg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faPlusCircle, faCirclePlus, faTrashCan} from '@fortawesome/free-solid-svg-icons';
+import {faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import ModalConfirmAction from '../../components/ModalConfirmAction';
 import { toast } from "react-toastify";
 import Loading from '../../components/Loading';
@@ -133,7 +133,7 @@ function EditNotice() {
       id: id,
     };
     setNotice(data);
-    setIsDelete(false);
+    setIsDelete(true);
     setModalDescription("Tem certeza que deseja excluir esse aviso?")
     setAction("deleteNotice");
     openModal(); // Abre o modal após excluir o aviso
@@ -161,6 +161,10 @@ function EditNotice() {
     
                 <button className = 'edit-notice-delete-button'  onClick={() => handleDeleteNotice()}>
                   EXCLUIR AVISO
+                </button>
+
+                <button className="edit-notice-delete-button-minimized" onClick={() => handleDeleteNotice()}>
+                  <FontAwesomeIcon icon={faTrashAlt}/>
                 </button>
               </section>
     
@@ -199,12 +203,12 @@ function EditNotice() {
                 </div>      
               </section>  
     
-              <section className='edit-route-buttons'>
-                <button className = 'edit-route-cancel-button' onClick={() => goBackToPreviousPage() }>
+              <section className='edit-notice-buttons'>
+                <button className = 'edit-notice-cancel-button' onClick={() => goBackToPreviousPage() }>
                   CANCELAR
                 </button>
     
-                <button className= 'edit-route-create-button' onClick={() => handleEditNotice()}>
+                <button className= 'edit-notice-button' onClick={() => handleEditNotice()}>
                   EDITAR AVISO
                 </button>
     

@@ -98,6 +98,7 @@
 }
 
 .new-route-buttons{
+  gap: 24px;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -106,7 +107,7 @@
 
 .new-route-cancel-button{
   right: 40px;
-  width: 160px;
+  width: 150px;
   height: 48px;
   text-align: center;
   display: flex;
@@ -131,7 +132,7 @@
 }
 
 .new-route-create-button{
-  width: 160px;
+  width: 150px;
   height: 48px;
   text-align: center;
   display: flex;
@@ -153,5 +154,17 @@
   transition: all 0.2s ease;
 }
 
+@media (max-width: 500px) {  
+  .new-route-container{
+      padding: 40px 16px;
+  }
+  .new-route-cancel-button{
+    height: 40px;
+  }
+  
+  .new-route-create-button{
+    height: 40px;
+  }
+}
 
 

@@ -11,6 +11,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between; 
+    align-items: center;
     width: 100%;
     max-width: 1000px;
 }
@@ -47,7 +48,11 @@
     border: 1px solid var(--secondary-background);
     -webkit-transition: all 0.2s ease;
     transition: all 0.2s ease;
-  }
+}
+
+.edit-notice-delete-button-minimized{
+  display: none;
+}
 
 .edit-notice-content{
     display: flex;
@@ -137,16 +142,17 @@
   color: var(--descriptions);
 }
 
-.edit-route-buttons{
+.edit-notice-buttons{
+  gap: 24px;
   display: flex;
   justify-content: space-between;
   width: 100%;
   max-width: 500px;
 }
 
-.edit-route-cancel-button{
+.edit-notice-cancel-button{
   right: 40px;
-  width: 160px;
+  width: 150px;
   height: 48px;
   text-align: center;
   display: flex;
@@ -163,15 +169,15 @@
   font-family: "Roboto Condensed", sans-serif;
 }
 
-.edit-route-cancel-button:hover {
+.edit-notice-cancel-button:hover {
   color: var(--light-blue);  
   border: 1px solid var(--light-blue);
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
 
-.edit-route-create-button{
-  width: 160px;
+.edit-notice-button{
+  width: 150px;
   height: 48px;
   text-align: center;
   display: flex;
@@ -187,7 +193,7 @@
   font-family: "Roboto Condensed", sans-serif;
 }
 
-.edit-route-create-button:hover {
+.edit-notice-button:hover {
   background-color: var(--light-blue);
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
@@ -195,4 +201,30 @@
 
 .edit-notice-loading{
   margin-top: 180px;
+}
+
+@media (max-width: 1023px) {  
+  .edit-notice-delete-button {
+      display: none;
+  }
+  
+  .edit-notice-delete-button-minimized{
+      display: block;
+      font-size: 32px;
+      color: var(--red);
+      background-color: transparent;
+      border-color: transparent;
+  }
+}
+
+@media (max-width: 500px) {  
+  .edit-notice-container{
+      padding: 40px 16px;
+  }
+  .edit-notice-cancel-button{
+    height: 40px;
+  }
+  .edit-notice-button{
+    height: 40px;
+  }
 }
