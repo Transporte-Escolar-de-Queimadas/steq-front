@@ -7,6 +7,8 @@ import { getAllNotices } from '../../service/notices_service';
 import { toast } from "react-toastify";
 import Loading from '../../components/Loading';
 import NotFound from '../../components/NotFound';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 function ManageNotices() {
     const [loading, setLoading] = useState(true);
@@ -81,6 +83,10 @@ function ManageNotices() {
 
           <button className = 'manage-notices-new-button'  onClick={() => handleNewNotice()}>
             NOVO AVISO
+          </button>
+
+          <button className="manage-notices-new-button-minimized" onClick={() => handleNewNotice()}>
+            <FontAwesomeIcon icon={faPlusCircle}/>
           </button>
         </section>
 
