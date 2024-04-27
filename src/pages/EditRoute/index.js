@@ -3,7 +3,7 @@ import './styles.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import BackIcon from "../../assets/BackIcon.svg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faPlusCircle, faCirclePlus, faTrashCan, faTrash} from '@fortawesome/free-solid-svg-icons';
+import {faPlusCircle, faCirclePlus, faTrashCan, faTrash, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import ModalConfirmAction from '../../components/ModalConfirmAction';
 import InputMask from "react-input-mask";
 import { toast } from "react-toastify";
@@ -216,6 +216,10 @@ function EditRoute() {
 
                 <button className = 'edit-route-delete-button'  onClick={() => handleDeleteRoute()}>
                   EXCLUIR ROTA
+                </button>
+
+                <button className="edit-route-delete-button-minimized" onClick={() => handleDeleteRoute()}>
+                  <FontAwesomeIcon icon={faTrashAlt}/>
                 </button>
               </section>
 
