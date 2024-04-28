@@ -45,65 +45,69 @@ function Home() {
       });
     }, []); // Executar apenas uma vez na primeira renderização
 
-    const handleSearch = () => {
 
-      if(searchKeyword){
+    const handleSearch = () => {
+      // Remover espaços em branco extras do final da palavra-chave
+      const trimmedKeyword = searchKeyword.trim();
+
+      if (trimmedKeyword) {
         setHasSearchKeyWord(true);
-      } else{
+      } else {
         setHasSearchKeyWord(false);
       }
 
       setLoading(true);
-    // pegar a ordenação ao contrário porque ao final do handleSort, o estado é invertido
-    // preparando a função para o próximo handleSort.
+    // pegar a ordenação ao contrário porque ao final do handleSort, o estado é invertido.
       const searchAscendingOrder = !ascendingOrder;
-      
-      getAllRoutes().then(response => {
-        
-        // Aplicar a ordenação na lista 
-        const sortedFilteredRoutes = response.sort((a, b) => {
-          const timeA = new Date(`2000-01-01T${a.embarkation_time}`);
-          const timeB = new Date(`2000-01-01T${b.embarkation_time}`);
-          return searchAscendingOrder ? timeA - timeB : timeB - timeA;
-        });
 
-        const filteredRoutes = sortedFilteredRoutes.filter((route) => {
-          const time = parseInt(route.embarkation_time.split(':')[0], 10);
-          const destinationsArray = JSON.parse(route.destinations);
-          const routeIsValid =  destinationsArray.some((destino) => destino.toLowerCase().includes(searchKeyword.toLowerCase())) ||
-          route.embarkation_place.toLowerCase().includes(searchKeyword.toLowerCase())
-          if (showFilter && routeIsValid) {
-            // Filtrar com base no horário de saída e no filtro ativo
-            if (showFilter === 'Manhã') {
-              return time >= 4 && time < 12;
-            } else if (showFilter === 'Tarde') {
-              return time >= 12 && time < 18;
-            } else if (showFilter === 'Noite') {
-              return time >= 18 || time < 4;
+      getAllRoutes()
+        .then((response) => {
+          // Aplicar a ordenação na lista 
+          const sortedFilteredRoutes = response.sort((a, b) => {
+            const timeA = new Date(`2000-01-01T${a.embarkation_time}`);
+            const timeB = new Date(`2000-01-01T${b.embarkation_time}`);
+            return searchAscendingOrder ? timeA - timeB : timeB - timeA;
+          });
+
+          const filteredRoutes = sortedFilteredRoutes.filter((route) => {
+            const time = parseInt(route.embarkation_time.split(':')[0], 10);
+            const destinationsArray = JSON.parse(route.destinations);
+            const routeIsValid =
+              destinationsArray.some((destino) =>
+                destino.toLowerCase().includes(trimmedKeyword.toLowerCase())) 
+                ||
+                route.embarkation_place.toLowerCase().includes(trimmedKeyword.toLowerCase());
+
+            if (showFilter && routeIsValid) {
+              if (showFilter === 'Manhã') {
+                return time >= 4 && time < 12;
+              } else if (showFilter === 'Tarde') {
+                return time >= 12 && time < 18;
+              } else if (showFilter === 'Noite') {
+                return time >= 18 || time < 4;
+              }
+            } else {
+              // Filtrar apenas por termo de busca
+              return routeIsValid;
             }
-          } else {
-            // Filtrar apenas por termo de busca
-            return routeIsValid;       
-          }
+          });
+          setRoutes(filteredRoutes);
+        })
+        .catch((error) => {
+          toast.error("Erro ao buscar rotas", {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          })
+        })
+        .finally(() => {
+          setLoading(false);
         });
-        
-        setRoutes(filteredRoutes);
-      })
-      .catch((error) => {
-        toast.error("Erro ao buscar rotas", {
-          position: "top-right",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-      })
-      .finally(() => {
-        setLoading(false);
-      })
     };
 
     const handleNotice = () => {

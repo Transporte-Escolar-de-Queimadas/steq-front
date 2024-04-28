@@ -46,22 +46,24 @@ function ManageRoutes() {
       });
     }, []); // Executar apenas uma vez na primeira renderização
 
-    const handleSearch = () => {
+  const handleSearch = () => {
+    // Remover espaços em branco extras do final da palavra-chave
+    const trimmedKeyword = searchKeyword.trim();
 
-      if(searchKeyword){
-        setHasSearchKeyWord(true);
-      } else{
-        setHasSearchKeyWord(false);
-      }
+    if (trimmedKeyword) {
+      setHasSearchKeyWord(true);
+    } else {
+      setHasSearchKeyWord(false);
+    }
 
-      setLoading(true);
-    // pegar a ordenação ao contrário porque ao final do handleSort, o estado é invertido
-    // preparando a função para o próximo handleSort.
-      const searchAscendingOrder = !ascendingOrder;
-      
-      getAllRoutes().then(response => {
-        
-        // Aplicar a ordenação na lista 
+    setLoading(true);
+    // pegar a ordenação ao contrário porque ao final do handleSort, o estado é invertido.
+    const searchAscendingOrder = !ascendingOrder;
+
+    getAllRoutes()
+      // Aplicar a ordenação na lista 
+
+      .then((response) => {
         const sortedFilteredRoutes = response.sort((a, b) => {
           const timeA = new Date(`2000-01-01T${a.embarkation_time}`);
           const timeB = new Date(`2000-01-01T${b.embarkation_time}`);
@@ -71,10 +73,13 @@ function ManageRoutes() {
         const filteredRoutes = sortedFilteredRoutes.filter((route) => {
           const time = parseInt(route.embarkation_time.split(':')[0], 10);
           const destinationsArray = JSON.parse(route.destinations);
-          const routeIsValid =  destinationsArray.some((destino) => destino.toLowerCase().includes(searchKeyword.toLowerCase())) ||
-          route.embarkation_place.toLowerCase().includes(searchKeyword.toLowerCase())
+          const routeIsValid =
+            destinationsArray.some((destino) =>
+              destino.toLowerCase().includes(trimmedKeyword.toLowerCase()))
+              ||
+              route.embarkation_place.toLowerCase().includes(trimmedKeyword.toLowerCase());
+
           if (showFilter && routeIsValid) {
-            // Filtrar com base no horário de saída e no filtro ativo
             if (showFilter === 'Manhã') {
               return time >= 4 && time < 12;
             } else if (showFilter === 'Tarde') {
@@ -83,11 +88,10 @@ function ManageRoutes() {
               return time >= 18 || time < 4;
             }
           } else {
-            // Filtrar apenas por termo de busca
-            return routeIsValid;       
+          // Filtrar apenas por termo de busca
+            return routeIsValid;
           }
         });
-        
         setRoutes(filteredRoutes);
       })
       .catch((error) => {
@@ -100,13 +104,12 @@ function ManageRoutes() {
           draggable: true,
           progress: undefined,
           theme: "colored",
-        });
+        })
       })
       .finally(() => {
         setLoading(false);
-      })
-    };
-
+      });
+  };
     const handleNewRoute = () => {
       navigate('/administrador/nova-rota');
     };
