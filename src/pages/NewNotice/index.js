@@ -1,10 +1,7 @@
 import { useState } from 'react';
 import './styles.css';
-import  Notice  from "../../components/Notice";
 import { useNavigate } from 'react-router-dom';
 import BackIcon from "../../assets/BackIcon.svg";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faPlusCircle, faCirclePlus, faTrashCan} from '@fortawesome/free-solid-svg-icons';
 import ModalConfirmAction from '../../components/ModalConfirmAction';
 import { toast } from "react-toastify";
 
