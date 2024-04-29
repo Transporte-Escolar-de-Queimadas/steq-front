@@ -8,10 +8,6 @@ import AppProvider from "./contexts";
 
 function App() {
 
-  useEffect(() => {
-    document.title = "Sistema de Transporte Escolar de Queimadas"
-  }, [])
-
   return (
     <AppProvider>
       <AppRoutes />
